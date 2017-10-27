@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FlockObjectController : MonoBehaviour
 {
     private GameController _GameController;
-    private ShowDestination _ShowDes;
 
     [SerializeField]
     private float _MoveSpeed, _GroupRange, _AvoidanceRange, _RotationSpeed;
@@ -15,7 +13,6 @@ public class FlockObjectController : MonoBehaviour
     private void Awake()
     {
         _GameController = FindObjectOfType<GameController>();
-        _ShowDes = FindObjectOfType<ShowDestination>();
     }
 
 
