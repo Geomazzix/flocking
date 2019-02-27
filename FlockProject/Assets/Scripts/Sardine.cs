@@ -41,16 +41,18 @@ namespace Flocking
 
             if (flockSize <= 0) return;
 
-            //Calculate the flock center.
-            Vector3 flockCenter = Vector3.zero;
-            foreach (Sardine sardine in flockFishes)
-                flockCenter += sardine.transform.position;
-            flockCenter /= flockFishes.Count;
-
-            Vector3 center = flockCenter + (_SardineDestinationManager.GetFlockDestination - transform.position);
+            Vector3 center = CalculateCenterFlock(in flockFishes) + (_SardineDestinationManager.GetFlockDestination - transform.position);
             Vector3 direction = (center + avoidance) - transform.position;
 
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), _RotationSpeed * Time.deltaTime);
+        }
+
+        private Vector3 CalculateCenterFlock(in List<Sardine> flock)
+        {
+            Vector3 flockCenter = Vector3.zero;
+            foreach (Sardine sardine in flock)
+                flockCenter += sardine.transform.position;
+            return flockCenter / flock.Count;
         }
 
         private void MoveSaldineForward()
